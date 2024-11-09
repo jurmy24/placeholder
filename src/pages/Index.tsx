@@ -4,11 +4,15 @@ import TextInput from "@/components/TextInput";
 import Preview3D from "@/components/Preview3D";
 import { useToast } from "@/components/ui/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "@/components/theme-provider";
 
 const Index = () => {
   const [previewUrl, setPreviewUrl] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { setTheme, theme } = useTheme();
 
   const handleFileSelect = async (file: File) => {
     setIsLoading(true);
@@ -55,26 +59,35 @@ const Index = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#fafafa] lg:flex-row">
+    <div className="flex min-h-screen flex-col bg-background lg:flex-row">
       {/* Left Panel */}
       <div className="flex w-full flex-col space-y-6 p-8 lg:w-1/2">
-        <div className="text-left">
-          <h1 className="text-4xl font-bold text-gray-900">
-            3D Asset Generator
-          </h1>
-          <p className="mt-2 text-lg text-gray-600">
-            Transform your images and text into stunning 3D assets instantly
-          </p>
+        <div className="flex items-center justify-between">
+          <div className="text-left">
+            <h1 className="text-4xl font-bold text-foreground">
+              3D Asset Generator
+            </h1>
+            <p className="mt-2 text-lg text-muted-foreground">
+              Transform your images and text into stunning 3D assets instantly
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? (
+              <MoonIcon className="h-5 w-5" />
+            ) : (
+              <SunIcon className="h-5 w-5" />
+            )}
+          </Button>
         </div>
 
         <Tabs defaultValue="file" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-100">
-            <TabsTrigger value="file" className="data-[state=active]:bg-white">
-              Upload File
-            </TabsTrigger>
-            <TabsTrigger value="text" className="data-[state=active]:bg-white">
-              Enter Text
-            </TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="file">Upload File</TabsTrigger>
+            <TabsTrigger value="text">Enter Text</TabsTrigger>
           </TabsList>
           <TabsContent value="file" className="mt-4">
             <FileUpload onFileSelect={handleFileSelect} />
@@ -86,8 +99,8 @@ const Index = () => {
       </div>
 
       {/* Right Panel */}
-      <div className="flex w-full bg-white p-8 lg:w-1/2">
-        <div className="h-[600px] w-full rounded-lg border border-gray-200">
+      <div className="flex w-full bg-muted/30 p-8 lg:w-1/2">
+        <div className="h-[600px] w-full rounded-lg border border-border">
           <Preview3D imageUrl={previewUrl} isLoading={isLoading} />
         </div>
       </div>

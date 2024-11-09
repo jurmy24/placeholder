@@ -23,11 +23,11 @@ const TextInput = ({ onSubmit }: TextInputProps) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Enter text to generate 3D asset..."
-        className="min-h-[100px] resize-none border-gray-200 focus:border-gray-400 focus:ring-gray-400"
+        className="min-h-[100px] resize-none"
       />
       <Button
         type="submit"
-        className="w-full bg-black text-white hover:bg-gray-800"
+        className="w-full bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600"
         disabled={!text.trim()}
       >
         Generate 3D Asset

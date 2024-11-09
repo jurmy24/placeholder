@@ -44,7 +44,9 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
   return (
     <div
       className={`relative rounded-lg border-2 border-dashed p-8 transition-colors ${
-        isDragging ? "border-gray-400 bg-gray-50" : "border-gray-200"
+        isDragging
+          ? "border-indigo-500 bg-indigo-50/50 dark:border-indigo-400 dark:bg-indigo-950/20"
+          : "border-border"
       }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -57,10 +59,10 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
         onChange={handleFileInput}
       />
       <div className="flex flex-col items-center justify-center space-y-4">
-        <Upload className="h-12 w-12 text-gray-400" />
+        <Upload className="h-12 w-12 text-muted-foreground" />
         <div className="text-center">
-          <p className="text-lg font-medium text-gray-900">Drop your file here or click to upload</p>
-          <p className="text-sm text-gray-500">Supports images and PDF files</p>
+          <p className="text-lg font-medium text-foreground">Drop your file here or click to upload</p>
+          <p className="text-sm text-muted-foreground">Supports images and PDF files</p>
         </div>
       </div>
     </div>
