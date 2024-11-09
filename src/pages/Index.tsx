@@ -55,22 +55,26 @@ const Index = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col lg:flex-row">
+    <div className="flex min-h-screen flex-col bg-[#fafafa] lg:flex-row">
       {/* Left Panel */}
-      <div className="flex w-full flex-col space-y-8 bg-white p-8 lg:w-1/2">
-        <div className="text-center lg:text-left">
-          <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent">
+      <div className="flex w-full flex-col space-y-6 p-8 lg:w-1/2">
+        <div className="text-left">
+          <h1 className="text-4xl font-bold text-gray-900">
             3D Asset Generator
           </h1>
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-lg text-gray-600">
             Transform your images and text into stunning 3D assets instantly
           </p>
         </div>
 
         <Tabs defaultValue="file" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="file">Upload File</TabsTrigger>
-            <TabsTrigger value="text">Enter Text</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 bg-gray-100">
+            <TabsTrigger value="file" className="data-[state=active]:bg-white">
+              Upload File
+            </TabsTrigger>
+            <TabsTrigger value="text" className="data-[state=active]:bg-white">
+              Enter Text
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="file" className="mt-4">
             <FileUpload onFileSelect={handleFileSelect} />
@@ -82,8 +86,8 @@ const Index = () => {
       </div>
 
       {/* Right Panel */}
-      <div className="flex w-full bg-gray-50 p-8 lg:w-1/2">
-        <div className="h-[600px] w-full">
+      <div className="flex w-full bg-white p-8 lg:w-1/2">
+        <div className="h-[600px] w-full rounded-lg border border-gray-200">
           <Preview3D imageUrl={previewUrl} isLoading={isLoading} />
         </div>
       </div>

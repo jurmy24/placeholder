@@ -25,7 +25,7 @@ const Preview3D = ({ imageUrl, isLoading }: Preview3DProps) => {
   }
 
   return (
-    <div ref={containerRef} className="h-full w-full rounded-lg bg-gray-50">
+    <div ref={containerRef} className="h-full w-full rounded-lg bg-white">
       {imageUrl ? (
         <img
           src={imageUrl}
