@@ -117,8 +117,8 @@ const Index = () => {
         {/* Left Panel */}
         <div className="flex w-full flex-col space-y-6 p-8 lg:w-1/2">
           <div className="text-left">
-            <h1 className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-5xl font-black tracking-tight text-transparent [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
-              3D Asset Generator
+            <h1 className="font-mono text-4xl font-bold tracking-tight">
+              placeholder/asset-generator
             </h1>
             <p className="mt-2 text-lg text-muted-foreground">
               Transform your images and text into stunning 3D assets instantly
