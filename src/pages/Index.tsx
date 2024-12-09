@@ -2,12 +2,19 @@ import { useState } from "react";
 import FileUpload from "@/components/FileUpload";
 import TextInput from "@/components/TextInput";
 import Preview3D from "@/components/Preview3D";
-import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon, Github, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import { toast } from "sonner";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Index = () => {
   const [previewUrl, setPreviewUrl] = useState<string>();
@@ -57,19 +64,52 @@ const Index = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Menu Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-8 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="text-xl font-bold tracking-tight">Placeholder</div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        >
-          {theme === "light" ? (
-            <MoonIcon className="h-5 w-5" />
-          ) : (
-            <SunIcon className="h-5 w-5" />
-          )}
-        </Button>
+      <div className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="flex items-center space-x-4">
+          <div className="text-xl font-bold tracking-tight">Placeholder</div>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Models</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="grid gap-3 p-4 w-[400px]">
+                    <div className="flex flex-col space-y-2">
+                      <h4 className="font-medium leading-none">Stable Diffusion XL</h4>
+                      <p className="text-sm text-muted-foreground">
+                        High-quality image generation model
+                      </p>
+                    </div>
+                    <div className="flex flex-col space-y-2">
+                      <h4 className="font-medium leading-none">ControlNet</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Advanced image manipulation and control
+                      </p>
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Button variant="ghost" size="icon">
+            <Github className="h-5 w-5" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <Share2 className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? (
+              <MoonIcon className="h-5 w-5" />
+            ) : (
+              <SunIcon className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
       </div>
 
       {/* Main Content */}
