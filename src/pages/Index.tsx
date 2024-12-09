@@ -7,14 +7,6 @@ import { MoonIcon, SunIcon, Github, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
 import { toast } from "sonner";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 
 const Index = () => {
   const [previewUrl, setPreviewUrl] = useState<string>();
@@ -62,41 +54,16 @@ const Index = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      {/* Menu Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/b3a3d13e-9c8a-4e56-baf8-7dbee5c4d9c5.png" 
-              alt="Logo" 
-              className="h-8 w-8"
-            />
-            <div className="text-xl font-bold tracking-tight">Placeholder</div>
-          </div>
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Models</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="grid gap-3 p-4 w-[400px]">
-                    <div className="flex flex-col space-y-2">
-                      <h4 className="font-medium leading-none">Stable Diffusion XL</h4>
-                      <p className="text-sm text-muted-foreground">
-                        High-quality image generation model
-                      </p>
-                    </div>
-                    <div className="flex flex-col space-y-2">
-                      <h4 className="font-medium leading-none">ControlNet</h4>
-                      <p className="text-sm text-muted-foreground">
-                        Advanced image manipulation and control
-                      </p>
-                    </div>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="flex items-center space-x-3">
+          <img 
+            src="/lovable-uploads/b3a3d13e-9c8a-4e56-baf8-7dbee5c4d9c5.png" 
+            alt="Logo" 
+            className="h-8 w-8"
+          />
+          <span className="text-xl font-bold">Placeholder</span>
         </div>
         <div className="flex items-center space-x-4">
           <Button variant="ghost" size="icon">
@@ -117,38 +84,52 @@ const Index = () => {
             )}
           </Button>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <div className="mt-16 flex flex-col lg:flex-row">
-        {/* Left Panel */}
-        <div className="flex w-full flex-col space-y-6 p-8 lg:w-1/2">
-          <div className="text-left">
-            <h1 className="font-mono text-4xl font-bold tracking-tight">
-              placeholder/asset-generator
-            </h1>
-            <p className="mt-2 text-lg text-muted-foreground">
-              Transform your images and text into stunning 3D assets instantly
-            </p>
+      <main className="container mx-auto pt-24 px-4">
+        {/* Model Title */}
+        <div className="mb-8">
+          <h1 className="font-mono text-2xl font-semibold mb-2">placeholder / x-to-3D</h1>
+          <div className="flex space-x-4 text-sm text-muted-foreground">
+            <span className="flex items-center">
+              <span className="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>
+              Running
+            </span>
+            <span>23.1k views</span>
+            <span>1.2k assets generated</span>
           </div>
-
-          <Tabs defaultValue="file" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="file">Upload File</TabsTrigger>
-              <TabsTrigger value="text">Enter Text</TabsTrigger>
-            </TabsList>
-            <TabsContent value="file" className="mt-4">
-              <FileUpload onFileSelect={handleFileSelect} />
-            </TabsContent>
-            <TabsContent value="text" className="mt-4">
-              <TextInput onSubmit={handleTextSubmit} />
-            </TabsContent>
-          </Tabs>
         </div>
 
-        {/* Right Panel */}
-        <div className="flex w-full bg-muted/30 p-8 lg:w-1/2">
-          <div className="h-[600px] w-full overflow-hidden rounded-lg border border-border bg-background/50 shadow-lg backdrop-blur-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Input Section */}
+          <div className="space-y-6">
+            <Tabs defaultValue="text" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="text">text-to-3D</TabsTrigger>
+                <TabsTrigger value="image">image-to-3D</TabsTrigger>
+              </TabsList>
+              <TabsContent value="text" className="mt-4">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Provide a description here of an object you would like to generate a 3D model of:
+                  </p>
+                  <TextInput onSubmit={handleTextSubmit} />
+                </div>
+              </TabsContent>
+              <TabsContent value="image" className="mt-4">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Upload an image to generate a 3D model:
+                  </p>
+                  <FileUpload onFileSelect={handleFileSelect} />
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Preview Section */}
+          <div className="h-[500px] rounded-lg border border-border overflow-hidden">
             <Preview3D
               imageUrl={previewUrl}
               isLoading={isLoading}
@@ -157,7 +138,7 @@ const Index = () => {
             />
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
