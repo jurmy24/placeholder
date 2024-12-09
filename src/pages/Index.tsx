@@ -66,7 +66,14 @@ const Index = () => {
       {/* Menu Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex items-center space-x-4">
-          <div className="text-xl font-bold tracking-tight">Placeholder</div>
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/lovable-uploads/b3a3d13e-9c8a-4e56-baf8-7dbee5c4d9c5.png" 
+              alt="Logo" 
+              className="h-8 w-8"
+            />
+            <div className="text-xl font-bold tracking-tight">Placeholder</div>
+          </div>
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
