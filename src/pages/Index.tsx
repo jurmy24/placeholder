@@ -2,19 +2,19 @@ import { useState } from "react";
 import FileUpload from "@/components/FileUpload";
 import TextInput from "@/components/TextInput";
 import Preview3D from "@/components/Preview3D";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme-provider";
+import { toast } from "sonner";
 
 const Index = () => {
   const [previewUrl, setPreviewUrl] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
   const [fileName, setFileName] = useState<string>();
   const [inputType, setInputType] = useState<"file" | "text">("file");
-  const { toast } = useToast();
-  const { setTheme, theme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   const handleFileSelect = async (file: File) => {
     setIsLoading(true);
@@ -23,15 +23,12 @@ const Index = () => {
       setPreviewUrl(url);
       setFileName(file.name);
       setInputType("file");
-      toast({
-        title: "File uploaded successfully",
+      toast.success("File uploaded successfully", {
         description: "Your 3D asset is being generated.",
       });
     } catch (error) {
-      toast({
-        title: "Error uploading file",
+      toast.error("Error uploading file", {
         description: "Please try again.",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -45,15 +42,12 @@ const Index = () => {
       setPreviewUrl("https://images.unsplash.com/photo-1518770660439-4636190af475");
       setFileName(`Generated from: ${text.slice(0, 20)}${text.length > 20 ? "..." : ""}`);
       setInputType("text");
-      toast({
-        title: "Text processed successfully",
+      toast.success("Text processed successfully", {
         description: "Your 3D asset is ready.",
       });
     } catch (error) {
-      toast({
-        title: "Error processing text",
+      toast.error("Error processing text", {
         description: "Please try again.",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -64,7 +58,7 @@ const Index = () => {
     <div className="flex min-h-screen flex-col bg-background">
       {/* Menu Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-8 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="text-xl font-bold">Assetify Creator</div>
+        <div className="text-xl font-bold tracking-tight">Placeholder</div>
         <Button
           variant="ghost"
           size="icon"
@@ -83,7 +77,7 @@ const Index = () => {
         {/* Left Panel */}
         <div className="flex w-full flex-col space-y-6 p-8 lg:w-1/2">
           <div className="text-left">
-            <h1 className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-5xl font-black tracking-tight text-transparent [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+            <h1 className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-5xl font-black tracking-tight text-transparent [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
               3D Asset Generator
             </h1>
             <p className="mt-2 text-lg text-muted-foreground">
@@ -107,7 +101,7 @@ const Index = () => {
 
         {/* Right Panel */}
         <div className="flex w-full bg-muted/30 p-8 lg:w-1/2">
-          <div className="h-[600px] w-full overflow-hidden rounded-lg border border-border">
+          <div className="h-[600px] w-full overflow-hidden rounded-lg border border-border bg-background/50 shadow-lg backdrop-blur-sm">
             <Preview3D
               imageUrl={previewUrl}
               isLoading={isLoading}
