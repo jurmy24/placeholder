@@ -58,9 +58,9 @@ const Index = () => {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex items-center space-x-3">
-          <img 
-            src="/lovable-uploads/b3a3d13e-9c8a-4e56-baf8-7dbee5c4d9c5.png" 
-            alt="Logo" 
+          <img
+            src="/lovable-uploads/b3a3d13e-9c8a-4e56-baf8-7dbee5c4d9c5.png"
+            alt="Logo"
             className="h-8 w-8"
           />
           <span className="text-xl font-bold">Placeholder</span>
@@ -77,11 +77,7 @@ const Index = () => {
             size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
-            {theme === "light" ? (
-              <MoonIcon className="h-5 w-5" />
-            ) : (
-              <SunIcon className="h-5 w-5" />
-            )}
+            {theme === "light" ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
           </Button>
         </div>
       </header>
@@ -112,16 +108,15 @@ const Index = () => {
               <TabsContent value="text" className="mt-4">
                 <div className="space-y-4">
                   <p className="text-muted-foreground">
-                    Provide a description here of an object you would like to generate a 3D model of:
+                    Provide a description here of an object you would like to generate a 3D model
+                    of:
                   </p>
                   <TextInput onSubmit={handleTextSubmit} />
                 </div>
               </TabsContent>
               <TabsContent value="image" className="mt-4">
                 <div className="space-y-4">
-                  <p className="text-muted-foreground">
-                    Upload an image to generate a 3D model:
-                  </p>
+                  <p className="text-muted-foreground">Upload an image to generate a 3D model:</p>
                   <FileUpload onFileSelect={handleFileSelect} />
                 </div>
               </TabsContent>
@@ -131,7 +126,7 @@ const Index = () => {
           {/* Preview Section */}
           <div className="h-[500px] rounded-lg border border-border overflow-hidden">
             <Preview3D
-              imageUrl={previewUrl}
+              modelUrl={previewUrl}
               isLoading={isLoading}
               fileName={fileName}
               inputType={inputType}
